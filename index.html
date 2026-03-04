@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Email Verified — UNEE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #1A6BFF;
+      --blue-dark: #0F4FCC;
+      --bg: #F0F4FF;
+      --white: #FFFFFF;
+      --text-dark: #0D1B3E;
+      --text-grey: #6B7A99;
+      --green: #12C26B;
+      --green-light: #E6FAF2;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Animated background blobs */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.35;
+      animation: float 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .blob-1 {
+      width: 400px; height: 400px;
+      background: var(--blue);
+      top: -100px; left: -100px;
+      animation-delay: 0s;
+    }
+    .blob-2 {
+      width: 300px; height: 300px;
+      background: var(--green);
+      bottom: -80px; right: -80px;
+      animation-delay: 3s;
+    }
+    .blob-3 {
+      width: 200px; height: 200px;
+      background: #A8C5FF;
+      top: 50%; left: 60%;
+      animation-delay: 1.5s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-30px) scale(1.05); }
+    }
+
+    /* Card */
+    .card {
+      background: var(--white);
+      border-radius: 28px;
+      padding: 52px 44px;
+      max-width: 420px;
+      width: 90%;
+      box-shadow: 0 24px 80px rgba(26, 107, 255, 0.12),
+                  0 4px 20px rgba(0,0,0,0.06);
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      animation: slideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px) scale(0.96); }
+      to   { opacity: 1; transform: translateY(0)   scale(1); }
+    }
+
+    /* Logo */
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--blue);
+      letter-spacing: 2px;
+      margin-bottom: 36px;
+      display: block;
+    }
+
+    /* Check icon */
+    .icon-wrap {
+      width: 88px;
+      height: 88px;
+      background: var(--green-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      animation: popIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.5); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .icon-wrap svg {
+      width: 44px;
+      height: 44px;
+    }
+
+    /* Checkmark draw animation */
+    .check-path {
+      stroke-dasharray: 60;
+      stroke-dashoffset: 60;
+      animation: drawCheck 0.6s ease 0.7s forwards;
+    }
+
+    @keyframes drawCheck {
+      to { stroke-dashoffset: 0; }
+    }
+
+    /* Title */
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+      line-height: 1.2;
+      animation: fadeIn 0.5s ease 0.5s both;
+    }
+
+    /* Subtitle */
+    p {
+      font-size: 15px;
+      color: var(--text-grey);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      animation: fadeIn 0.5s ease 0.6s both;
+    }
+
+    p strong {
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: #E8EDF5;
+      margin-bottom: 28px;
+      animation: fadeIn 0.5s ease 0.7s both;
+    }
+
+    /* Steps */
+    .steps {
+      text-align: left;
+      margin-bottom: 36px;
+      animation: fadeIn 0.5s ease 0.8s both;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .step:last-child { margin-bottom: 0; }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      background: var(--blue);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .step-text {
+      font-size: 14px;
+      color: var(--text-dark);
+      line-height: 1.5;
+    }
+
+    .step-text span {
+      color: var(--text-grey);
+      font-size: 13px;
+      display: block;
+    }
+
+    /* CTA button */
+    .cta {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: var(--blue);
+      color: white;
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      animation: fadeIn 0.5s ease 0.9s both;
+    }
+
+    .cta:hover {
+      background: var(--blue-dark);
+      transform: translateY(-2px);
+    }
+
+    .cta:active { transform: translateY(0); }
+
+    /* Footer note */
+    .footer-note {
+      margin-top: 20px;
+      font-size: 12px;
+      color: var(--text-grey);
+      animation: fadeIn 0.5s ease 1s both;
+    }
+
+    .footer-note a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background blobs -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <div class="card">
+    <span class="logo">UNEE</span>
+
+    <!-- Animated check icon -->
+    <div class="icon-wrap">
+      <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="22" cy="22" r="22" fill="#E6FAF2"/>
+        <path
+          class="check-path"
+          d="M12 22.5L19.5 30L33 15"
+          stroke="#12C26B"
+          stroke-width="3.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+
+    <h1>Email Verified!</h1>
+    <p>Your UNEE account is now active. <strong>Open the app and log in</strong> to start accessing study materials.</p>
+
+    <div class="divider"></div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          Open the UNEE app on your phone
+          <span>Tap the UNEE icon on your home screen</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          Tap "Login" and enter your details
+          <span>Use the email and password you signed up with</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          Start studying!
+          <span>Access past papers, notes and more</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="footer-note">
+      Having trouble? Contact us at
+      <a href="mailto:nnokoboris81@gmail.com">nnokoboris81@gmail.com</a>
+    </p>
+  </div>
+
+</body>
+</html>
