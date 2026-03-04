@@ -1,2 +1,0 @@
-# unee-verify
-EMAIL VERIFICATION
